@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Erfolgreich Abgeschoben</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #16130f;
+      color: rgb(241, 6, 6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+
+    .confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: random;
+      animation: fall 3s infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100vh) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    /* Flugzeug-Animation */
+    .airplane {
+      position: absolute;
+      bottom: 30px;
+      left: -150px;
+      width: 80px;
+      height: 50px;
+      background-image: url(./Airbus-A320-Testflugzeug-scaled-e1616809195443.jpg); /* Flugzeug-Icon */
+      background-size: cover;
+      animation: flyPlane 5s linear infinite;
+    }
+
+    @keyframes flyPlane {
+      0% { left: -150px; }
+      100% { left: 100vw; }
+    }
+
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Glückwunsch! Sie haben erfolgreich abgeschoben!</h1>
+    <div id="confetti"></div>
+  </div>
+
+  <!-- Flugzeug-Element -->
+  <div class="airplane"></div>
+
+  <!-- Audio-Element für Hintergrundmusik -->
+  <audio autoplay loop>
+    <source src="https://www.youtube.com/watch?v=w15oWDh02K4" type="">
+    Ihr Browser unterstützt das Audio-Tag nicht.
+  </audio>
+
+  <script>
+    // Konfetti erzeugen
+    function createConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const confettiPiece = document.createElement('div');
+        confettiPiece.classList.add('confetti-piece');
+        confettiPiece.style.left = `${Math.random() * 100}vw`;
+        confettiPiece.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        confettiPiece.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        document.getElementById('confetti').appendChild(confettiPiece);
+      }
+    }
+
+    // Start Konfetti
+    createConfetti();
+  </script>
+</body>
+</html>

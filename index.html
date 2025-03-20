@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abschiebungsformular</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Abschiebungsformular</h1>
+    <form id="abschiebungsForm">
+      <label for="vorname">Vorname:</label>
+      <input type="text" id="vorname" required>
+
+      <label for="nachname">Nachname:</label>
+      <input type="text" id="nachname" required>
+
+      <label for="alter">Alter:</label>
+      <input type="number" id="alter" required>
+
+      <label for="wohnort">Wohnort:</label>
+      <input type="text" id="wohnort" required>
+
+      <label for="grund">Grund:</label>
+      <textarea id="grund" required></textarea>
+
+      <label for="datum">Datum:</label>
+      <input type="date" id="datum" required>
+
+      <button type="submit">Abschieben</button>
+    </form>
+
+    <h2>Gespeicherte Daten:</h2>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Alter</th>
+          <th>Wohnort</th>
+          <th>Grund</th>
+          <th>Datum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamisch gefüllte Zeilen -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.getElementById('abschiebungsForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const vorname = document.getElementById('vorname').value;
+      const nachname = document.getElementById('nachname').value;
+      const alter = document.getElementById('alter').value;
+      const wohnort = document.getElementById('wohnort').value;
+      const grund = document.getElementById('grund').value;
+      const datum = document.getElementById('datum').value;
+
+      const newRow = document.createElement('tr');
+      newRow.innerHTML = `
+        <td>${vorname}</td>
+        <td>${nachname}</td>
+        <td>${alter}</td>
+        <td>${wohnort}</td>
+        <td>${grund}</td>
+        <td>${datum}</td>
+      `;
+      
+      document.querySelector('#dataTable tbody').appendChild(newRow);
+
+      // Form zurücksetzen
+      document.getElementById('abschiebungsForm').reset();
+
+      // Überprüfen, ob es mindestens 5 Zeilen in der Tabelle gibt
+      if (document.querySelectorAll('#dataTable tbody tr').length >= 5) {
+        // Weiterleitung zur Erfolgsseite
+        window.location.href = 'erfolgsseite.html';
+      }
+    });
+  </script>
+</body>
+</html>
